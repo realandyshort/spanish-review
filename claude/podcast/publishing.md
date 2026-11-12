@@ -32,5 +32,4 @@ Andy wants this automated. He does not want to upload files by hand each week.
 - Every Friday an episode is built: that week's sessions (CSVs dated in the past 7 days) plus a general review of older material. The table above records what each episode covered so reviews rotate instead of repeating. After publishing, the run adds a row to the table.
 
 ## Next episode plan (the run follows this, then deletes the note)
-- TEST RUN: build a tiny test episode named episodes/2026-11-11.mp3 (JSON at tools/episodes/2026-11-11.json). Title "Test episode". Intro (English): "This is a test of the automatic podcast." One section named "Test." with a single item: English "Hello! How are you?", Spanish "¡Hola! ¿Cómo estás?". No drills, no recap, no conversation. Outro (English): "End of test." Publish it normally.
 - 2026-11-14: Andy asked for a general review across ALL lessons so far (every CSV in claude/anki, including 00_All_Topics_Combined.csv). No single week's focus; mix topics and grammar concepts, keep it 10 to 15 minutes.
