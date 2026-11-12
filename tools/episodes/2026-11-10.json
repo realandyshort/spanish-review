@@ -1,0 +1,99 @@
+{
+  "title": "Spanish Review, Week of November 10: Breakfast, the Vet, and Clothes",
+  "intro": "Welcome to your Spanish review for the week of November tenth. First, this week's new words. You'll hear the English, then a pause. Say the Spanish out loud, then listen to it twice. After that, a quick verb drill, a short recap of last week, and a conversation that uses what you've learned. Let's start.",
+  "sections": [
+    {"name": "Breakfast.", "items": [
+      ["oatmeal", "la avena"],
+      ["vanilla syrup. There are two ways to say it.", "el jarabe de vainilla. O, el sirope de vainilla."],
+      ["egg. eggs.", "el huevo. los huevos."]
+    ]},
+    {"name": "Dogs and the vet.", "items": [
+      ["animal shelter", "el refugio de animales"],
+      ["a dog collar", "el collar"],
+      ["German shepherd", "el pastor alemán"],
+      ["bad breath", "el mal aliento"]
+    ]},
+    {"name": "Health and the body.", "items": [
+      ["weak. One, then more than one.", "débil. débiles."],
+      ["nail. nails.", "la uña. las uñas."],
+      ["pain", "el dolor"],
+      ["cholesterol", "el colesterol"]
+    ]},
+    {"name": "People and expressions.", "items": [
+      ["grandfather", "el abuelo"],
+      ["one or two. A few, here and there.", "uno que otro"],
+      ["to blame someone", "echarle la culpa a alguien"]
+    ]},
+    {"name": "Clothes.", "items": [
+      ["a dress", "el vestido"],
+      ["dressed. For a man, then for a woman.", "vestido. vestida."],
+      ["T-shirt, in Mexico", "la playera"],
+      ["blouse", "la blusa"],
+      ["sweater", "el suéter"]
+    ]},
+    {"name": "Verbs and grammar.", "items": [
+      ["to kill", "matar"],
+      ["to say, or to tell", "decir"],
+      ["I like you. Usually romantic.", "Me gustas."],
+      ["I told him. Or, I told her.", "Yo le dije."],
+      ["You tell me.", "Tú me dices."]
+    ]}
+  ],
+  "drills": [
+    {"name": "Verb drill. Decir, to say. Present tense.", "items": [
+      ["I say", "yo digo"],
+      ["you say", "tú dices"],
+      ["he says", "él dice"],
+      ["we say", "nosotros decimos"],
+      ["they say", "ellos dicen"]
+    ]},
+    {"name": "Decir, in the past.", "items": [
+      ["I said", "yo dije"],
+      ["you said", "tú dijiste"],
+      ["he said", "él dijo"],
+      ["we said", "nosotros dijimos"],
+      ["they said", "ellos dijeron"]
+    ]}
+  ],
+  "recap": {"name": "Now a quick recap from last week.", "items": [
+    ["veterinarian", "el veterinario"],
+    ["tooth. teeth.", "el diente. los dientes."],
+    ["cheaper", "más barato"],
+    ["pocket. pockets.", "el bolsillo. los bolsillos."],
+    ["dangerous", "peligroso"],
+    ["for no reason", "sin razón"],
+    ["I drove.", "Manejé."],
+    ["It depends on traffic.", "Depende del tráfico."],
+    ["Yesterday I went to Tijuana.", "Ayer fui a Tijuana."],
+    ["Leave me alone.", "Déjame en paz."]
+  ]},
+  "conversation": {
+    "intro": "Now, a conversation. Sofía and Diego are catching up. First you'll hear it slowly, with English after each line.",
+    "lines": [
+      ["A", "Buenos días, Diego. ¿Qué comiste hoy en la mañana?", "Good morning, Diego. What did you eat this morning?"],
+      ["B", "Comí avena con jarabe de vainilla. ¿Y tú?", "I ate oatmeal with vanilla syrup. And you?"],
+      ["A", "Yo comí dos huevos y tomé café.", "I ate two eggs and had coffee."],
+      ["B", "¿Cómo está tu perro?", "How is your dog?"],
+      ["A", "Más o menos. Ayer fui al veterinario con él.", "So-so. Yesterday I went to the vet with him."],
+      ["B", "¿Qué pasó?", "What happened?"],
+      ["A", "Tiene mal aliento y le duele un diente.", "He has bad breath and one of his teeth hurts."],
+      ["B", "Pobrecito. Es un pastor alemán, ¿verdad?", "Poor little guy. He's a German shepherd, right?"],
+      ["A", "Sí. Lo encontré en un refugio de animales.", "Yes. I found him at an animal shelter."],
+      ["B", "¿Y qué te dijo la veterinaria?", "And what did the vet tell you?"],
+      ["A", "Me dijo que está un poco débil, y que tiene las uñas muy largas.", "She told me he's a little weak, and that his nails are very long."],
+      ["B", "¿Tiene mucho dolor?", "Is he in a lot of pain?"],
+      ["A", "No, solo uno que otro día.", "No, only a day here and there."],
+      ["B", "Mi abuelo también fue al doctor. Tiene el colesterol alto.", "My grandfather also went to the doctor. He has high cholesterol."],
+      ["A", "¿Por qué?", "Why?"],
+      ["B", "Come muchos huevos, pero le echa la culpa a mi abuela.", "He eats a lot of eggs, but he blames my grandmother."],
+      ["A", "¡Ay, sí, ajá!", "Oh yeah, sure!"],
+      ["B", "Oye, me gusta tu suéter. ¿Es nuevo?", "Hey, I like your sweater. Is it new?"],
+      ["A", "Gracias. Sí. También compré una playera, y un collar para el perro.", "Thanks. Yes. I also bought a T-shirt, and a collar for the dog."],
+      ["B", "¿Y un vestido?", "And a dress?"],
+      ["A", "No. Los vestidos no tienen bolsillos.", "No. Dresses don't have pockets."],
+      ["B", "Bueno, ya estás vestida para el invierno. Y yo te digo algo: me gustas.", "Well, now you're dressed for winter. And I'll tell you something: I like you."],
+      ["A", "¡Diego! Déjame en paz.", "Diego! Leave me alone."]
+    ]
+  },
+  "outro": "That's it for this week. Nice work. Hasta la próxima."
+}
