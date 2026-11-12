@@ -3,7 +3,7 @@
 After each week's Anki vocab upload, make Andy an audio episode (MP3) and send it in the chat.
 
 ## Format Andy chose
-- Scope: that week's new vocab, plus a short recap (about 10 items) of older words. Rotate the recap through earlier sessions.
+- Scope (updated 2026-11-12): each Friday episode covers the tutoring sessions from THAT week (Anki CSVs dated in the past 7 days) plus a general review of older vocab and concepts (rotate through earlier sessions and the combined deck; include grammar concepts, not only words). If there was no tutoring that week, make the whole episode a general review.
 - Vocab review: English, pause to answer, then the Spanish twice, slowly.
 - Verb drill: any conjugation drills from that week, English prompt then Spanish once.
 - Conversation: two voices (Sofía = voice A, female; Diego = voice B, male). Slow pass with English after each line, then a natural-speed pass in Spanish only. Use this week's words, the recap words, and grammar he already has (present, preterite, ir a + infinitive). His own details (dog Papa, trip plans) are fine to use.

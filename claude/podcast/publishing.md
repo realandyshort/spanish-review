@@ -29,4 +29,7 @@ Andy wants this automated. He does not want to upload files by hand each week.
 - The Cowork scheduled task is paused. Publishing now runs as a **Claude Code scheduled task on Andy's Mac mini** (task id `spanish-review-weekly`, Fridays 8:05am Pacific). It works in the local clone `~/Developer/spanish-review` and pushes with the GitHub login in the Mac's keychain, so no repo-access step is needed.
 - The voices and engine are installed once on the mini at `tools/tts/` (gitignored). Engine is sherpa-onnx **v1.13.8**; v2.x removed the built-in phonemizer that `make_episode.py` uses, so do not upgrade it.
 - Vocab lives in this repo under `claude/anki/`. Each run also copies any new `spanish_anki_*.csv` from `~/Downloads` into `claude/anki/` before deciding what to build.
-- An episode is built only from CSV sessions not yet listed in the table above. After publishing, the run adds a row to the table.
+- Every Friday an episode is built: that week's sessions (CSVs dated in the past 7 days) plus a general review of older material. The table above records what each episode covered so reviews rotate instead of repeating. After publishing, the run adds a row to the table.
+
+## Next episode plan (the run follows this, then deletes the note)
+- 2026-11-14: Andy asked for a general review across ALL lessons so far (every CSV in claude/anki, including 00_All_Topics_Combined.csv). No single week's focus; mix topics and grammar concepts, keep it 10 to 15 minutes.
