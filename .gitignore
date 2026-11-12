@@ -1,0 +1,4 @@
+tools/tts/
+tools/cache/
+.access-check-only
+__pycache__/
