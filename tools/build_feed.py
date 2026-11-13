@@ -2,7 +2,7 @@
 """Rebuild the podcast feeds from the files in episodes/ (named YYYY-MM-DD.mp3 / .mp4). Run from the repo root:
    python3 tools/build_feed.py
 Writes feed.xml (audio, for Overcast etc.) and feed-video.xml (captioned video, for Apple Podcasts)."""
-import glob, os, subprocess, datetime, email.utils
+import glob, os, subprocess, datetime, email.utils, hashlib
 from xml.sax.saxutils import escape
 BASE = "https://realandyshort.github.io/spanish-review"
 
@@ -18,9 +18,11 @@ def write_feed(out, ext, mime, title):
         secs = int(float(probe(p, "format=duration")))
         when = datetime.datetime.strptime(date, "%Y-%m-%d").replace(hour=15, tzinfo=datetime.timezone.utc)
         url = f"{BASE}/{p}"
+        # video guid carries a short hash of the file, so a re-rendered video shows up as a fresh episode in apps
+        tag = "" if ext == "mp3" else "-video-" + hashlib.md5(open(p, "rb").read()).hexdigest()[:8]
         items.append(f"""    <item>
       <title>{escape(ep_title)}</title>
-      <guid isPermaLink="false">spanish-review-{date}{'' if ext == 'mp3' else '-video'}</guid>
+      <guid isPermaLink="false">spanish-review-{date}{tag}</guid>
       <pubDate>{email.utils.format_datetime(when)}</pubDate>
       <enclosure url="{url}" length="{os.path.getsize(p)}" type="{mime}"/>
       <itunes:duration>{secs}</itunes:duration>
