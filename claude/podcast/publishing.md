@@ -29,7 +29,7 @@ Andy wants this automated. He does not want to upload files by hand each week.
 - The Cowork scheduled task is paused. Publishing now runs as a **Claude Code scheduled task on Andy's Mac mini** (task id `spanish-review-weekly`, Fridays 8:05am Pacific). It works in the local clone `~/Developer/spanish-review` and pushes with the GitHub login in the Mac's keychain, so no repo-access step is needed.
 - The voices and engine are installed once on the mini at `tools/tts/` (gitignored). Engine is sherpa-onnx **v1.13.8**; v2.x removed the built-in phonemizer that `make_episode.py` uses, so do not upgrade it.
 - Vocab lives in this repo under `claude/anki/`. Each run also copies any new `spanish_anki_*.csv` from `~/Downloads` into `claude/anki/` before deciding what to build.
-- Two feeds: `feed.xml` (audio, Overcast) and `feed-video.xml` (captioned MP4, Apple Podcasts: `https://realandyshort.github.io/spanish-review/feed-video.xml`). `tools/build_feed.py` writes both. Each run builds the MP3 and the MP4.
+- Two feeds: `feed.xml` (audio, Overcast) and `feed-video.xml` (captioned MP4, Apple Podcasts: `https://realandyshort.github.io/spanish-review/feed-video.xml`). `tools/build_feed.py` writes both. Each run builds the MP3 and the MP4. Video episode IDs include a short hash of the MP4, so a re-rendered video shows up as a fresh episode in Apple Podcasts (the app otherwise keeps the copy it already fetched).
 - Every Friday an episode is built: that week's sessions (CSVs dated in the past 7 days) plus a general review of older material. The table above records what each episode covered so reviews rotate instead of repeating. After publishing, the run adds a row to the table.
 
 ## Next episode plan (the run follows this, then deletes the note)
