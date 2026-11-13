@@ -1,0 +1,103 @@
+{
+  "title": "Spanish Review, November 13: General Review of Everything So Far",
+  "intro": "Welcome to your Spanish review for November thirteenth. This week is a general review of everything so far. You'll hear the English, then a pause. Say the Spanish out loud, then listen to it twice. After the words, two verb drills, some grammar reminders, and a conversation. Let's start.",
+  "sections": [
+    {"name": "Your daily routine.", "items": [
+      ["I get up at seven.", "Me levanto a las siete."],
+      ["I shower in the morning.", "Me ducho por la mañana."],
+      ["Sometimes I go to bed late.", "A veces me acuesto tarde."],
+      ["after dinner", "después de cenar"]
+    ]},
+    {"name": "About you.", "items": [
+      ["I live in Los Angeles.", "Yo vivo en Los Ángeles."],
+      ["I study public health.", "Estudio salud pública."],
+      ["I'm doing a master's degree.", "Estoy haciendo una maestría."],
+      ["I didn't do my homework.", "No hice mi tarea."]
+    ]},
+    {"name": "Dogs.", "items": [
+      ["He's always in my lap.", "Siempre está en mi regazo."],
+      ["a spoiled little dog", "un perrito consentido"],
+      ["Who's going to take care of him?", "¿Quién lo va a cuidar?"],
+      ["The door was open.", "La puerta estaba abierta."]
+    ]},
+    {"name": "The body.", "items": [
+      ["the shoulder", "el hombro"],
+      ["the back", "la espalda"],
+      ["My shoulder hurts.", "Me duele el hombro."]
+    ]},
+    {"name": "Food and the restaurant.", "items": [
+      ["the waiter", "el mesero"],
+      ["seafood", "los mariscos"],
+      ["I'm thirsty.", "Tengo sed."],
+      ["I have a reservation.", "Tengo una reserva."],
+      ["Bring me the check, please.", "Tráigame la cuenta, por favor."]
+    ]},
+    {"name": "Time and numbers.", "items": [
+      ["yesterday", "ayer"],
+      ["on weekends", "los fines de semana"],
+      ["forty-seven", "cuarenta y siete"],
+      ["It's two o'clock.", "Son las dos."]
+    ]},
+    {"name": "Moods and expressions.", "items": [
+      ["I'm in a bad mood.", "Estoy de malas."],
+      ["Do you feel like going out today?", "¿Tienes ganas de salir hoy?"],
+      ["I'm afraid of heights.", "Tengo miedo a las alturas."],
+      ["What happened?", "¿Qué pasó?"]
+    ]}
+  ],
+  "drills": [
+    {"name": "Verb drill. Hacer, to do. In the past.", "items": [
+      ["I did", "yo hice"],
+      ["you did", "tú hiciste"],
+      ["he did", "él hizo"],
+      ["we did", "nosotros hicimos"],
+      ["they did", "ellos hicieron"]
+    ]},
+    {"name": "Acostarse, to go to bed. Present tense.", "items": [
+      ["I go to bed", "yo me acuesto"],
+      ["you go to bed", "tú te acuestas"],
+      ["he goes to bed", "él se acuesta"],
+      ["we go to bed", "nosotros nos acostamos"],
+      ["they go to bed", "ellos se acuestan"]
+    ]}
+  ],
+  "recap": {"name": "Now some grammar reminders.", "items": [
+    ["Papa is crazy. It's his personality.", "Papa es loco."],
+    ["Papa is acting crazy today.", "Hoy Papa está loco."],
+    ["I like tacos.", "Me gustan los tacos."],
+    ["My brother doesn't like it.", "A mi hermano no le gusta."],
+    ["a problem. It looks feminine, but it isn't.", "un problema"],
+    ["the hand. It ends in O, but it's feminine.", "la mano"],
+    ["Order it for me.", "Pídeme."],
+    ["I'm going to study Spanish.", "Voy a estudiar español."]
+  ]},
+  "conversation": {
+    "intro": "Now, a conversation. Sofía and Diego are at a restaurant. First you'll hear it slowly, with English after each line.",
+    "lines": [
+      ["A", "Hola, Diego. ¿Cómo amaneciste?", "Hi, Diego. How are you this morning?"],
+      ["B", "Más o menos. Estoy de malas. Me duele el hombro.", "So-so. I'm in a bad mood. My shoulder hurts."],
+      ["A", "¿Qué pasó?", "What happened?"],
+      ["B", "Ayer me acosté tarde y no dormí bien.", "Yesterday I went to bed late and I didn't sleep well."],
+      ["A", "Pobrecito. Yo me levanto a las siete todos los días.", "Poor thing. I get up at seven every day."],
+      ["B", "Yo casi nunca me levanto temprano los fines de semana.", "I hardly ever get up early on weekends."],
+      ["A", "¿Tienes hambre? Yo tengo una reserva aquí.", "Are you hungry? I have a reservation here."],
+      ["B", "Sí, y tengo mucha sed. ¿Qué vas a pedir?", "Yes, and I'm very thirsty. What are you going to order?"],
+      ["A", "Voy a pedir la ensalada de mariscos. ¿Y tú?", "I'm going to order the seafood salad. And you?"],
+      ["B", "Me gustan los tacos. Pídeme tres, por favor.", "I like tacos. Order me three, please."],
+      ["A", "¿Y cómo está Papa?", "And how is Papa?"],
+      ["B", "Papa es un perrito consentido. Siempre está en mi regazo.", "Papa is a spoiled little dog. He's always in my lap."],
+      ["A", "¿Quién lo va a cuidar durante tu viaje?", "Who's going to take care of him during your trip?"],
+      ["B", "Mi hermano. Pero hoy Papa está loco.", "My brother. But today Papa is acting crazy."],
+      ["A", "¿Por qué?", "Why?"],
+      ["B", "La puerta estaba abierta y él quería salir.", "The door was open and he wanted to go out."],
+      ["A", "¡Ay, no! ¿Y tu maestría? ¿Hiciste tu tarea?", "Oh no! And your master's? Did you do your homework?"],
+      ["B", "No, no hice mi tarea. Voy a estudiar después de cenar.", "No, I didn't do my homework. I'm going to study after dinner."],
+      ["A", "¿Tienes ganas de salir el sábado?", "Do you feel like going out on Saturday?"],
+      ["B", "Sí, pero no a la montaña. Tengo miedo a las alturas.", "Yes, but not to the mountain. I'm afraid of heights."],
+      ["A", "Bueno, vamos al mercado. Es más barato.", "Okay, let's go to the market. It's cheaper."],
+      ["B", "Perfecto. Mesero, tráigame la cuenta, por favor.", "Perfect. Waiter, bring me the check, please."],
+      ["A", "¡Diego! Todavía no comimos.", "Diego! We haven't eaten yet."]
+    ]
+  },
+  "outro": "That's it for this week. Nice work. Hasta la próxima."
+}

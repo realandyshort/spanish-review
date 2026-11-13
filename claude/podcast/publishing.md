@@ -24,6 +24,7 @@ Andy wants this automated. He does not want to upload files by hand each week.
 |---|---|---|---|
 | episodes/2026-11-10.mp3 | 2026-11-10 | 2026-11-06 | 2026-11-12, by hand |
 | episodes/2026-11-12.mp3 | 2026-11-06 | 2026-11-03 (travel and restaurant items) | 2026-11-12, by hand (Claude Code session pushed it) |
+| episodes/2026-11-13.mp3 | none (general review of all lessons, per Andy's note) | routine and reflexives (09-24, 10-06), about me, school and work, dogs (10-14, 10-21), body and pain (10-14), food, restaurant, time, numbers, moods, ganas (11-03), fear of heights (10-22); grammar: ser vs estar, gustar, noun gender, command plus pronoun, ir a + infinitive; drills: hacer preterite, acostarse present | 2026-11-13, by scheduled task |
 
 ## Automation since 2026-11-12 (current setup)
 - The Cowork scheduled task is paused. Publishing now runs as a **Claude Code scheduled task on Andy's Mac mini** (task id `spanish-review-weekly`, Fridays 8:05am Pacific). It works in the local clone `~/Developer/spanish-review` and pushes with the GitHub login in the Mac's keychain, so no repo-access step is needed.
@@ -33,4 +34,3 @@ Andy wants this automated. He does not want to upload files by hand each week.
 - Every Friday an episode is built: that week's sessions (CSVs dated in the past 7 days) plus a general review of older material. The table above records what each episode covered so reviews rotate instead of repeating. After publishing, the run adds a row to the table.
 
 ## Next episode plan (the run follows this, then deletes the note)
-- 2026-11-14: Andy asked for a general review across ALL lessons so far (every CSV in claude/anki, including 00_All_Topics_Combined.csv). No single week's focus; mix topics and grammar concepts, keep it 10 to 15 minutes.
