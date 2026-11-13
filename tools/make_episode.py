@@ -31,7 +31,9 @@ CACHE = os.path.join(HERE, "cache")
 SLOW, NATURAL = 1.35, 1.05   # length scale: higher is slower
 EN_SPEAKER = 1               # Kokoro English voice (1 = af_bella); more natural than the Piper English voice
 EN_PROMPT = 1.2              # English prompts in the vocab sections are slowed down
-WORD_GAP = 0.35              # seconds between word groups on the first reading of a phrase
+WORD_GAP = 0.45              # seconds between word groups on the first reading of a phrase
+REPEAT_GAP = 1.7             # pause between the first and second Spanish reading
+ITEM_GAP = 2.8               # pause after an item before the next English prompt
 GLUE = {"el", "la", "los", "las", "un", "una", "unos", "unas", "de", "del", "a", "al", "en", "con", "por",
         "para", "sin", "y", "o", "que", "no", "me", "te", "le", "les", "lo", "se", "nos", "mi", "tu", "su", "muy"}
 
@@ -94,16 +96,16 @@ def build(ep):
     say = lambda v, t, s=1.0, p=0.6: seg.append((v, t, s, p))
 
     def item(en, es):
-        answer = 2.5 + 0.28 * len(es.split())          # longer answers get a longer pause
+        answer = 3.0 + 0.32 * len(es.split())          # longer answers get a longer pause
         say("en", en, EN_PROMPT, answer)
         parts = chunks(es)
         if len(es.split()) >= 3 and len(parts) >= 2:   # phrases: word groups with gaps first, then whole
             for c in parts[:-1]:
                 say("A", c, SLOW, WORD_GAP)
-            say("A", parts[-1], SLOW, 1.3)
+            say("A", parts[-1], SLOW, REPEAT_GAP)
         else:
-            say("A", es, SLOW, 1.2)
-        say("A", es, SLOW, 2.2)
+            say("A", es, SLOW, REPEAT_GAP)
+        say("A", es, SLOW, ITEM_GAP)
 
     say("en", ep["intro"], 1.0, 1.0)
     for sec in ep.get("sections", []):
@@ -113,8 +115,8 @@ def build(ep):
     for d in ep.get("drills", []):
         say("en", d["name"], 1.0, 0.9)
         for en, es in d["items"]:
-            say("en", en, EN_PROMPT, 2.2)
-            say("A", es, SLOW, 1.6)
+            say("en", en, EN_PROMPT, 2.7)
+            say("A", es, SLOW, 2.0)
     if ep.get("recap"):
         say("en", ep["recap"]["name"], 1.0, 0.9)
         for en, es in ep["recap"]["items"]:

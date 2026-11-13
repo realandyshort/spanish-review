@@ -16,6 +16,9 @@ After each week's Anki vocab upload, make Andy an audio episode (MP3) and send i
 - The conversation was good. Left unchanged.
 - The English voice sounded very robotic. Switched from the Piper English voice to Kokoro (af_bella). Awaiting Andy's verdict on version 2.
 
+## Andy's feedback 2026-11-12 (applied in make_episode.py)
+- Everything before the conversation was a little too fast. Pauses in the vocab, drill and recap sections are longer now: 3.0 s plus 0.32 s per word after the English prompt, 1.7 s between the two Spanish readings, 2.8 s after each item, 0.45 s between word groups; drills 2.7 s after the prompt and 2.0 s after the answer. Conversation unchanged.
+
 ## How to build an episode
 1. Write `episodes/<date>.json` (copy the shape of `episodes/2026-11-10.json`).
 2. Set up the voices in a folder `tts/` next to `make_episode.py` (the cloud workspace starts empty each session). All downloads come from GitHub, which is reachable; Hugging Face and PyPI are not.
