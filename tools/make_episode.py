@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Build a Spanish review podcast MP3 (and optionally a captioned MP4) from an episode JSON file.
+"""Build a Spanish review podcast MP3 (and optionally a captioned vertical MP4) from an episode JSON file.
 
 Usage: python3 make_episode.py episodes/2026-11-10.json out.mp3 [out.mp4]
 
@@ -14,11 +14,14 @@ Episode JSON keys:
 Format per vocab item: English, pause to answer, Spanish slowly, Spanish slowly again.
 Conversation: slow pass with English after each line, then a natural-speed pass in Spanish only.
 
-The optional MP4 is the same audio with caption cards on a black background: the English prompt
-appears first, the Spanish line joins it when it is spoken. Cards are drawn with Pillow and
-stitched by ffmpeg, so no subtitle plugin is needed.
+The optional MP4 is the same audio with flashcard-style captions on a black, phone-shaped screen:
+the English term appears first, the Spanish joins it when spoken, and each word lights up as it is
+said (timing is estimated from word length). Narration is shown one sentence at a time. In vocab
+items only the first English sentence is shown (anything after it is a spoken hint), and Spanish
+alternatives written "X. O, Y." show as two lines. Cards are drawn with Pillow and stitched by
+ffmpeg, so no subtitle plugin is needed.
 """
-import hashlib, json, os, subprocess, sys, wave
+import hashlib, json, os, re, subprocess, sys, wave
 from concurrent.futures import ThreadPoolExecutor
 import numpy as np
 
@@ -42,9 +45,11 @@ ITEM_GAP = 2.8               # pause after an item before the next English promp
 GLUE = {"el", "la", "los", "las", "un", "una", "unos", "unas", "de", "del", "a", "al", "en", "con", "por",
         "para", "sin", "y", "o", "que", "no", "me", "te", "le", "les", "lo", "se", "nos", "mi", "tu", "su", "muy"}
 
-# Video / caption card settings
-W, H, FPS = 1280, 720, 10
+# Video / caption card settings (vertical, phone-shaped)
+W, H, FPS = 1080, 1920, 15
 FONT = "/System/Library/Fonts/Helvetica.ttc"   # index 0 regular, 1 bold, 4 light
+DIM, LIT, HOT = (120, 120, 120), (255, 255, 255), (255, 214, 79)   # unspoken, spoken, being spoken
+SENT = re.compile(r"(?<=[.!?])\s+")
 
 
 def chunks(es):
@@ -99,73 +104,118 @@ def load(path):
     return (x * gain).astype(np.int16)
 
 
+def tokens(text, kind):
+    """Split spoken text into (word, visible, line_break_after) for the caption.
+    Vocab English: only the first sentence is shown (anything after it is a spoken hint).
+    Vocab Spanish: alternatives separated by ". O, " become separate lines; the "O," is hidden.
+    """
+    out, sent = [], 0
+    ws = text.split()
+    for i, w in enumerate(ws):
+        last_in_sentence = w.endswith((".", "!", "?")) or i == len(ws) - 1
+        vis = True
+        if kind == "en" and sent > 0:
+            vis = False
+        if kind == "es" and w.lower().strip(",") == "o" and (i == 0 or ws[i - 1].endswith(".")):
+            vis = False
+        shown = w[:-1] if (w.endswith(".") and last_in_sentence) else w
+        out.append((shown, vis, last_in_sentence and i < len(ws) - 1))
+        if last_in_sentence:
+            sent += 1
+    return out
+
+
 def build(ep):
-    """Return list of (voice, text, scale, pause_after_seconds, card).
-    card describes what the video shows while this segment (and its pause) plays:
-      ("text", english)                      narration, headings
-      ("item", english, spanish_or_None)     vocab / drill / recap
-      ("conv", speaker, spanish, english_or_None)
+    """Return list of (voice, text, scale, pause_after_seconds, blocks, hl).
+    blocks: what the video shows while this segment plays, list of (style, text).
+    hl: (block_index, word_offset) when this segment's words should light up inside that block, else None.
     """
     seg = []
-    say = lambda v, t, s=1.0, p=0.6, card=None: seg.append((v, t, s, p, card or ("text", t)))
+
+    def say(v, t, s=1.0, p=0.6, blocks=None, hl=None):
+        seg.append((v, t, s, p, blocks or [("narr", t)], hl))
+
+    def narrate(text, pause):
+        """Narration is spoken and shown one sentence at a time."""
+        sents = SENT.split(text.strip())
+        for i, st in enumerate(sents):
+            say("en", st, 1.0, pause if i == len(sents) - 1 else 0.35, [("narr", st)], (0, 0))
 
     def item(en, es):
         answer = 3.0 + 0.32 * len(es.split())          # longer answers get a longer pause
-        say("en", en, EN_PROMPT, answer, ("item", en, None))
-        both = ("item", en, es)
+        say("en", en, EN_PROMPT, answer, [("en", en)], (0, 0))
+        both = [("en", en), ("es", es)]
         parts = chunks(es)
+        off = 0
         if len(es.split()) >= 3 and len(parts) >= 2:   # phrases: word groups with gaps first, then whole
             for c in parts[:-1]:
-                say("A", c, SLOW, WORD_GAP, both)
-            say("A", parts[-1], SLOW, REPEAT_GAP, both)
+                say("A", c, SLOW, WORD_GAP, both, (1, off)); off += len(c.split())
+            say("A", parts[-1], SLOW, REPEAT_GAP, both, (1, off))
         else:
-            say("A", es, SLOW, REPEAT_GAP, both)
-        say("A", es, SLOW, ITEM_GAP, both)
+            say("A", es, SLOW, REPEAT_GAP, both, (1, 0))
+        say("A", es, SLOW, ITEM_GAP, both, (1, 0))
 
-    say("en", ep["intro"], 1.0, 1.0)
+    narrate(ep["intro"], 1.0)
     for sec in ep.get("sections", []):
-        say("en", sec["name"], 1.0, 0.9)
+        say("en", sec["name"], 1.0, 0.9, [("head", sec["name"])], (0, 0))
         for en, es in sec["items"]:
             item(en, es)
     for d in ep.get("drills", []):
-        say("en", d["name"], 1.0, 0.9)
+        say("en", d["name"], 1.0, 0.9, [("head", d["name"])], (0, 0))
         for en, es in d["items"]:
-            say("en", en, EN_PROMPT, 2.7, ("item", en, None))
-            say("A", es, SLOW, 2.0, ("item", en, es))
+            say("en", en, EN_PROMPT, 2.7, [("en", en)], (0, 0))
+            say("A", es, SLOW, 2.0, [("en", en), ("es", es)], (1, 0))
     if ep.get("recap"):
-        say("en", ep["recap"]["name"], 1.0, 0.9)
+        say("en", ep["recap"]["name"], 1.0, 0.9, [("head", ep["recap"]["name"])], (0, 0))
         for en, es in ep["recap"]["items"]:
             item(en, es)
     conv = ep.get("conversation")
     if conv:
-        say("en", conv["intro"], 1.0, 1.0)
+        narrate(conv["intro"], 1.0)
         for who, es, en in conv["lines"]:
-            say(who, es, SLOW, 0.7, ("conv", SPEAKERS[who], es, None))
-            say("en", en, 1.0, 1.1, ("conv", SPEAKERS[who], es, en))
-        say("en", "Now the same conversation at natural speed, in Spanish only.", 1.0, 1.2)
+            name = SPEAKERS[who]
+            say(who, es, SLOW, 0.7, [("who", name), ("ces", es)], (1, 0))
+            say("en", en, 1.0, 1.1, [("who", name), ("ces", es), ("cen", en)], (2, 0))
+        narrate("Now the same conversation at natural speed, in Spanish only.", 1.2)
         for who, es, en in conv["lines"]:
-            say(who, es, NATURAL, 0.55, ("conv", SPEAKERS[who], es, None))
-    say("en", ep["outro"], 1.0, 0.5)
+            say(who, es, NATURAL, 0.55, [("who", SPEAKERS[who]), ("ces", es)], (1, 0))
+    narrate(ep["outro"], 0.5)
     return seg
 
 
 # ---------- captioned video ----------
 
-def _wrap(draw, text, font, max_w):
-    lines, cur = [], []
-    for w in text.split():
-        trial = " ".join(cur + [w])
-        if cur and draw.textbbox((0, 0), trial, font=font)[2] > max_w:
-            lines.append(" ".join(cur)); cur = [w]
-        else:
-            cur.append(w)
+STYLE = {  # style -> (font index, size, base colour, gap after block)
+    "narr": (4, 54, LIT, 0),
+    "head": (0, 64, LIT, 0),
+    "en":   (0, 58, (180, 180, 180), 48),
+    "es":   (1, 84, LIT, 0),
+    "who":  (0, 40, (120, 170, 255), 24),
+    "ces":  (1, 72, LIT, 40),
+    "cen":  (4, 50, (180, 180, 180), 0),
+}
+
+
+def layout(draw, toks, font, max_w):
+    """Wrap visible tokens into lines; returns list of lines, each a list of (word, token_index)."""
+    lines, cur, cur_w = [], [], 0
+    space = draw.textbbox((0, 0), " ", font=font)[2]
+    for i, (w, vis, brk) in enumerate(toks):
+        if not vis:
+            continue
+        ww = draw.textbbox((0, 0), w, font=font)[2]
+        if cur and cur_w + space + ww > max_w:
+            lines.append(cur); cur, cur_w = [], 0
+        cur.append((w, i)); cur_w += (space if len(cur) > 1 else 0) + ww
+        if brk:
+            lines.append(cur); cur, cur_w = [], 0
     if cur:
-        lines.append(" ".join(cur))
+        lines.append(cur)
     return lines
 
 
 def render_card(card):
-    """Draw one caption card to a cached PNG and return its path."""
+    """card: tuple of (style, text, n_spoken, current). Draws a cached PNG and returns its path."""
     from PIL import Image, ImageDraw, ImageFont
     os.makedirs(CACHE, exist_ok=True)
     key = hashlib.md5(json.dumps(card, ensure_ascii=False).encode()).hexdigest()
@@ -174,50 +224,51 @@ def render_card(card):
         return path
     img = Image.new("RGB", (W, H), "black")
     d = ImageDraw.Draw(img)
-    reg = lambda s: ImageFont.truetype(FONT, s, index=0)
-    bold = lambda s: ImageFont.truetype(FONT, s, index=1)
-    light = lambda s: ImageFont.truetype(FONT, s, index=4)
-    blocks = []   # (lines, font, color, gap_after)
-    kind = card[0]
-    if kind == "text":
-        f = light(40) if len(card[1]) > 60 else reg(52)
-        blocks.append((_wrap(d, card[1], f, W - 160), f, (235, 235, 235), 0))
-    elif kind == "item":
-        _, en, es = card
-        f = reg(46)
-        blocks.append((_wrap(d, en, f, W - 160), f, (170, 170, 170), 36))
-        if es:
-            f2 = bold(64)
-            blocks.append((_wrap(d, es, f2, W - 160), f2, (255, 255, 255), 0))
-    elif kind == "conv":
-        _, who, es, en = card
-        f0 = reg(34)
-        blocks.append(([who], f0, (120, 170, 255), 18))
-        f1 = bold(56)
-        blocks.append((_wrap(d, es, f1, W - 160), f1, (255, 255, 255), 30 if en else 0))
-        if en:
-            f2 = light(40)
-            blocks.append((_wrap(d, en, f2, W - 160), f2, (170, 170, 170), 0))
-    # measure, then draw centred
-    heights = []
-    for lines, f, _, gap in blocks:
-        lh = int(f.size * 1.25)
-        heights.append(lh * len(lines) + gap)
-    y = (H - sum(heights)) // 2
-    for (lines, f, color, gap), hh in zip(blocks, heights):
-        lh = int(f.size * 1.25)
-        for ln in lines:
-            tw = d.textbbox((0, 0), ln, font=f)[2]
-            d.text(((W - tw) // 2, y), ln, font=f, fill=color)
+    plan = []
+    for style, text, n_spoken, current in card:
+        idx, size, base, gap = STYLE[style]
+        font = ImageFont.truetype(FONT, size, index=idx)
+        kind = "en" if style == "en" else "es" if style == "es" else "x"
+        lines = layout(d, tokens(text, kind), font, W - 160)
+        plan.append((lines, font, base, gap, n_spoken, current, size))
+    total = sum(int(sz * 1.3) * len(lines) + gap for lines, _, _, gap, _, _, sz in plan)
+    y = (H - total) // 2
+    for lines, font, base, gap, n_spoken, current, size in plan:
+        lh = int(size * 1.3)
+        space = d.textbbox((0, 0), " ", font=font)[2]
+        for line in lines:
+            widths = [d.textbbox((0, 0), w, font=font)[2] for w, _ in line]
+            x = (W - (sum(widths) + space * (len(line) - 1))) // 2
+            for (w, i), ww in zip(line, widths):
+                if n_spoken is None:          # block not being spoken: plain base colour
+                    col = base
+                elif i == current:
+                    col = HOT
+                elif i < n_spoken:
+                    col = LIT if base == LIT else base
+                else:
+                    col = DIM
+                d.text((x, y), w, font=font, fill=col)
+                x += ww + space
             y += lh
         y += gap
     img.save(path, optimize=True)
     return path
 
 
+def word_times(text, dur):
+    """Approximate start time of each word inside a segment, by character share."""
+    ws = text.split()
+    weights = [len(w.strip(".,¿?¡!;:")) + 2 for w in ws]
+    tot = sum(weights)
+    t, out = 0.0, []
+    for wt in weights:
+        out.append(t); t += dur * wt / tot
+    return out
+
+
 def render_video(timeline, mp3, out, title):
     """timeline: list of (start_seconds, card). Writes an H.264 MP4 with AAC audio."""
-    # merge consecutive identical cards
     merged = []
     for t, c in timeline:
         if merged and merged[-1][1] == c:
@@ -230,7 +281,7 @@ def render_video(timeline, mp3, out, title):
         for i, (t, c) in enumerate(merged):
             end = merged[i + 1][0] if i + 1 < len(merged) else total
             p = render_card(c)
-            f.write(f"file '{p}'\nduration {max(end - t, 0.1):.3f}\n")
+            f.write(f"file '{p}'\nduration {max(end - t, 0.05):.3f}\n")
         f.write(f"file '{p}'\n")   # concat demuxer needs the last file repeated
     subprocess.run(["ffmpeg", "-y", "-loglevel", "error", "-f", "concat", "-safe", "0", "-i", lst, "-i", mp3,
                     "-vf", f"fps={FPS},format=yuv420p", "-c:v", "libx264", "-tune", "stillimage",
@@ -247,9 +298,29 @@ def main(src, out, video=None):
         paths = list(ex.map(lambda s: synth(s[0], s[1], s[2]), seg))
     parts = [np.zeros(int(SR * 0.5), np.int16)]
     timeline = []
-    for (v, t, s, pause, card), p in zip(seg, paths):
-        timeline.append((sum(len(x) for x in parts) / SR, card))
-        parts += [load(p), np.zeros(int(SR * pause), np.int16)]
+    spoken = {}   # id(blocks) is not stable across segments, so track by block text
+    for (v, t, s, pause, blocks, hl), p in zip(seg, paths):
+        start = sum(len(x) for x in parts) / SR
+        wav = load(p)
+        dur = len(wav) / SR
+        def card(n_by_block, current_block=None, current=-1):
+            return tuple((st, tx, n_by_block.get(bi), current if bi == current_block else -1)
+                         for bi, (st, tx) in enumerate(blocks))
+        # words of blocks before the highlighted one are fully spoken; later blocks not yet
+        n_by_block = {}
+        if hl:
+            bi, off = hl
+            for j in range(len(blocks)):
+                n_by_block[j] = len(blocks[j][1].split()) if j < bi else (0 if j > bi else off)
+            ws = t.split()
+            for k, wt in enumerate(word_times(t, dur)):
+                n_by_block[bi] = off + k
+                timeline.append((start + wt, card(n_by_block, bi, off + k)))
+            n_by_block[bi] = off + len(ws)
+            timeline.append((start + dur, card(n_by_block)))
+        else:
+            timeline.append((start, card({})))
+        parts += [wav, np.zeros(int(SR * pause), np.int16)]
     audio = np.concatenate(parts)
     tmp = out + ".wav"
     with wave.open(tmp, "wb") as w:
