@@ -6,6 +6,8 @@
     <language>en-us</language>
     <description>Personal weekly Spanish vocabulary review and conversation practice.</description>
     <itunes:author>Andy</itunes:author>
+    <itunes:image href="https://realandyshort.github.io/spanish-review/artwork.jpg"/>
+    <image><url>https://realandyshort.github.io/spanish-review/artwork.jpg</url><title>Andy's Spanish Review</title><link>https://realandyshort.github.io/spanish-review/</link></image>
     <itunes:block>Yes</itunes:block>
     <itunes:explicit>false</itunes:explicit>
     <item>

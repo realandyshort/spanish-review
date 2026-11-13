@@ -36,6 +36,8 @@ def write_feed(out, ext, mime, title):
     <language>en-us</language>
     <description>Personal weekly Spanish vocabulary review and conversation practice.</description>
     <itunes:author>Andy</itunes:author>
+    <itunes:image href="{BASE}/artwork.jpg"/>
+    <image><url>{BASE}/artwork.jpg</url><title>{escape(title)}</title><link>{BASE}/</link></image>
     <itunes:block>Yes</itunes:block>
     <itunes:explicit>false</itunes:explicit>
 {chr(10).join(items)}
