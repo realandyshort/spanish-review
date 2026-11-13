@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd">
+  <channel>
+    <title>Andy's Spanish Review (Video)</title>
+    <link>https://realandyshort.github.io/spanish-review/</link>
+    <language>en-us</language>
+    <description>Personal weekly Spanish vocabulary review and conversation practice.</description>
+    <itunes:author>Andy</itunes:author>
+    <itunes:block>Yes</itunes:block>
+    <itunes:explicit>false</itunes:explicit>
+    <item>
+      <title>Spanish Review, Week of November 10: Breakfast, the Vet, and Clothes</title>
+      <guid isPermaLink="false">spanish-review-2026-11-10-video</guid>
+      <pubDate>Tue, 10 Nov 2026 15:00:00 +0000</pubDate>
+      <enclosure url="https://realandyshort.github.io/spanish-review/episodes/2026-11-10.mp4" length="6675321" type="video/mp4"/>
+      <itunes:duration>775</itunes:duration>
+      <description>Spanish Review, Week of November 10: Breakfast, the Vet, and Clothes</description>
+    </item>
+  </channel>
+</rss>

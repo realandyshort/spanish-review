@@ -26,6 +26,7 @@ After each week's Anki vocab upload, make Andy an audio episode (MP3) and send i
    - Spanish voices, unpack into `tts/`: `https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/vits-piper-<name>.tar.bz2` for `es_MX-claude-high` (female, also reads vocab) and `es_MX-ald-medium` (male).
    - English voice, unpack into `tts/`: `https://github.com/k2-fsa/sherpa-onnx/releases/download/tts-models/kokoro-en-v0_19.tar.bz2` (about 320 MB).
 3. Run `python3 make_episode.py episodes/<date>.json "Spanish Review <date>.mp3"` (about 5 minutes), then send the MP3.
+4. (Since 2026-11-12) Pass a third argument to also get the captioned video: `python3 tools/make_episode.py tools/episodes/<date>.json episodes/<date>.mp3 episodes/<date>.mp4`. The video is black with white caption cards (English prompt, then the Spanish joins it; speaker names in the conversation), 1280x720, about 7 MB per episode. Cards are drawn with Pillow and stitched by ffmpeg; no extra Claude work.
 
 ## Status
 - Episode 1 (2026-11-10 vocab, recap from 2026-11-06): version 1 and version 2 delivered 2026-11-11. Claude cannot listen to audio, so sound quality relies on Andy's feedback.
