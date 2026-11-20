@@ -25,6 +25,7 @@ Andy wants this automated. He does not want to upload files by hand each week.
 | episodes/2026-11-10.mp3 | 2026-11-10 | 2026-11-06 | 2026-11-12, by hand |
 | episodes/2026-11-12.mp3 | 2026-11-06 | 2026-11-03 (travel and restaurant items) | 2026-11-12, by hand (Claude Code session pushed it) |
 | episodes/2026-11-13.mp3 | none (general review of all lessons, per Andy's note) | routine and reflexives (09-24, 10-06), about me, school and work, dogs (10-14, 10-21), body and pain (10-14), food, restaurant, time, numbers, moods, ganas (11-03), fear of heights (10-22); grammar: ser vs estar, gustar, noun gender, command plus pronoun, ir a + infinitive; drills: hacer preterite, acostarse present | 2026-11-13, by scheduled task |
+| episodes/2026-11-20.mp3 | 2026-11-19 (weather, describing things, wedding trip, work and tech, pets; direct object pronouns lo, la, los, las; drills: enviar and explicar present, llover) | seasons and weather (11-03), buen clima (09-24), travel: reservar, probar comida local (undated travel set, 11-03), bike theft (10-06), decir preterite (11-10) | 2026-11-20, by scheduled task |
 
 ## Automation since 2026-11-12 (current setup)
 - The Cowork scheduled task is paused. Publishing now runs as a **Claude Code scheduled task on Andy's Mac mini** (task id `spanish-review-weekly`, Fridays 8:05am Pacific). It works in the local clone `~/Developer/spanish-review` and pushes with the GitHub login in the Mac's keychain, so no repo-access step is needed.

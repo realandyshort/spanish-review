@@ -1,0 +1,108 @@
+{
+  "title": "Spanish Review, Week of November 19: Weather, a Wedding Trip, and Lo, La, Los, Las",
+  "intro": "Welcome to your Spanish review for the week of November nineteenth. First, this week's new words. You'll hear the English, then a pause. Say the Spanish out loud, then listen to it twice. After that, a verb drill, a review of older words, and a conversation that uses what you've learned. Let's start.",
+  "sections": [
+    {"name": "Weather.", "items": [
+      ["to rain", "llover"],
+      ["It rained.", "Llovió."],
+      ["The weather is very strange.", "El clima está muy raro."],
+      ["heat", "el calor"],
+      ["It's snowing.", "Está nevando."]
+    ]},
+    {"name": "Describing things.", "items": [
+      ["common", "común"],
+      ["weird. Masculine, then feminine.", "raro. rara."],
+      ["slow. Masculine, then feminine.", "lento. lenta."],
+      ["heavy. Also said of a big file.", "pesado. pesada."],
+      ["busy. For a man, then for a woman.", "ocupado. ocupada."],
+      ["out of the ordinary", "fuera de lo común"]
+    ]},
+    {"name": "Travel, and a wedding.", "items": [
+      ["map. It's masculine, even though it ends in A.", "el mapa"],
+      ["room. Also a hotel room.", "la habitación"],
+      ["round trip", "ida y vuelta"],
+      ["return trip", "el viaje de vuelta"],
+      ["wedding", "la boda"],
+      ["best man", "el padrino de bodas"]
+    ]},
+    {"name": "Work and tech.", "items": [
+      ["to save money", "ahorrar dinero"],
+      ["nonprofit organization", "la organización sin fines de lucro"],
+      ["a computer file", "el archivo"],
+      ["to send", "enviar"],
+      ["to explain", "explicar"]
+    ]},
+    {"name": "Pets and fitness.", "items": [
+      ["male. For animals.", "macho"],
+      ["female. For animals.", "hembra"],
+      ["cat. kitten.", "el gato. el gatito."],
+      ["protein powder", "la proteína en polvo"]
+    ]},
+    {"name": "Grammar. Saying it, and them. The little word matches the thing, and it goes before the verb.", "items": [
+      ["The map? I have it.", "¿El mapa? Lo tengo."],
+      ["The backpack? I have it.", "¿La mochila? La tengo."],
+      ["The tickets? I have them.", "¿Los boletos? Los tengo."],
+      ["The keys? I have them.", "¿Las llaves? Las tengo."]
+    ]}
+  ],
+  "drills": [
+    {"name": "Verb drill. Enviar, to send. Present tense.", "items": [
+      ["I send", "yo envío"],
+      ["you send", "tú envías"],
+      ["he sends", "él envía"],
+      ["we send", "nosotros enviamos"],
+      ["they send", "ellos envían"]
+    ]},
+    {"name": "Explicar, to explain. Present tense.", "items": [
+      ["I explain", "yo explico"],
+      ["you explain", "tú explicas"],
+      ["he explains", "él explica"],
+      ["we explain", "nosotros explicamos"],
+      ["they explain", "ellos explican"]
+    ]},
+    {"name": "Llover, to rain.", "items": [
+      ["it rains", "llueve"],
+      ["it rained", "llovió"],
+      ["that it rains. The form used after que.", "que llueva"]
+    ]}
+  ],
+  "recap": {"name": "Now a review of older words. Weather, travel, and a few from earlier weeks.", "items": [
+    ["winter", "el invierno"],
+    ["fall. The season.", "el otoño"],
+    ["good weather. Bueno gets shorter here.", "buen clima"],
+    ["to book. Or, to reserve.", "reservar"],
+    ["to try local food", "probar comida local"],
+    ["They stole your bike.", "Te robaron la bicicleta."],
+    ["He told me.", "Él me dijo."]
+  ]},
+  "conversation": {
+    "intro": "Now, a conversation. Sofía and Diego are talking on the phone before a wedding. First you'll hear it slowly, with English after each line.",
+    "lines": [
+      ["A", "Hola, Diego. ¿Cómo está el clima allá?", "Hi, Diego. How's the weather over there?"],
+      ["B", "Está muy raro. Ayer llovió, y hoy hace mucho calor.", "It's very strange. Yesterday it rained, and today it's very hot."],
+      ["A", "No es común en el otoño.", "That's not common in the fall."],
+      ["B", "No, es fuera de lo común. ¿Y allá?", "No, it's out of the ordinary. And there?"],
+      ["A", "Aquí está nevando, y hay mucho viento.", "Here it's snowing, and it's very windy."],
+      ["B", "Oye, ¿vas a ir a la boda de mi hermano?", "Hey, are you going to go to my brother's wedding?"],
+      ["A", "¡Claro! ¿Tú eres el padrino de bodas?", "Of course! Are you the best man?"],
+      ["B", "Sí. Estoy muy ocupado esta semana.", "Yes. I'm very busy this week."],
+      ["A", "¿Ya compraste los boletos?", "Did you buy the tickets yet?"],
+      ["B", "Sí, los compré ayer. Son de ida y vuelta.", "Yes, I bought them yesterday. They're round trip."],
+      ["A", "¿Y la habitación del hotel?", "And the hotel room?"],
+      ["B", "La reservé también. No es barata, pero voy a ahorrar dinero en la comida.", "I booked it too. It's not cheap, but I'm going to save money on food."],
+      ["A", "¿Tienes el mapa de la ciudad?", "Do you have the map of the city?"],
+      ["B", "No, no lo tengo. ¿Puedes enviar el archivo?", "No, I don't have it. Can you send the file?"],
+      ["A", "Sí, pero es muy pesado, y mi computadora es lenta.", "Yes, but it's very big, and my computer is slow."],
+      ["B", "No importa. Yo espero.", "It doesn't matter. I'll wait."],
+      ["A", "¿Y quién va a cuidar a Papa?", "And who's going to take care of Papa?"],
+      ["B", "Mi mamá. Ella lo quiere mucho.", "My mom. She loves him a lot."],
+      ["A", "¿Tu mamá no tiene un gato?", "Doesn't your mom have a cat?"],
+      ["B", "Sí, tiene un gato y un gatito. Papa los mira todo el día.", "Yes, she has a cat and a kitten. Papa watches them all day."],
+      ["A", "¿Y tus llaves? Siempre las pierdes.", "And your keys? You always lose them."],
+      ["B", "Las tengo en mi mochila. Tengo todas mis cosas aquí.", "I have them in my backpack. I have all my things here."],
+      ["A", "Muy bien. Nos vemos en la boda. ¿Tienes los boletos?", "Very good. See you at the wedding. Do you have the tickets?"],
+      ["B", "Sí, sí, los tengo. Un momento. ¿Dónde están los boletos?", "Yes, yes, I have them. One moment. Where are the tickets?"]
+    ]
+  },
+  "outro": "That's it for this week. Nice work. Hasta la próxima."
+}
